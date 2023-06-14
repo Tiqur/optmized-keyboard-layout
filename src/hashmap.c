@@ -23,6 +23,11 @@ HashMap CreateNewHashMap(int size)
 
 int HashMapHashChar(char key, int size)
 {
+  if (key < 0)
+  {
+    printf("Encountered negative key, exiting.");
+    exit(-1);
+  }
   return key % size;
 }
 

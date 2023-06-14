@@ -3,11 +3,14 @@
 
 int main(void)
 {
-  HashMap hm = CreateNewHashMap(97);
-  for (int i = 97; i < 123; i++)
+  // Since ASCII is 8 bit, initialize hashmap size to 257
+  // Optimal size that eliminates the need for implenting resizing
+  HashMap hm = CreateNewHashMap(257);
+
+  for (int i = 0; i < 128; i++)
     HashMapSet(&hm, i, i);
 
-  for (int i = 97; i < 123; i++) {
+  for (int i = 0; i < 128; i++) {
     KeyValue pair = HashMapGet(&hm, i);
     printf("%c %d\n", pair.key, pair.value);
   }
