@@ -8,6 +8,12 @@ HashMap CreateNewHashMap(int size)
   hm.size = size;
   hm.data = malloc(sizeof(KeyValue) * size);
 
+  if (hm.data == NULL)
+  {
+    printf("Memory allocation failed.\n");
+    exit(-1);
+  }
+
   // Explicitly set values
   for (int i = 0; i < size; i++)
     hm.data[i] = (struct KeyValue){0, 0};
@@ -27,7 +33,10 @@ KeyValue HashMapGet(HashMap* hm, char key)
   while (hm->data[hash_index].key != 0)
   {
     if (counter > hm->size)
+    {
+      printf("Counter exceeded maximum capacity, exiting to avoid infinite loop.");
       exit(-1);
+    }
 
     if (hm->data[hash_index].key == key)
       return hm->data[hash_index];
@@ -47,7 +56,10 @@ void HashMapSet(HashMap* hm, char key, int value)
   while (hm->data[hash_index].key != 0)
   {
     if (counter > hm->size)
+    {
+      printf("Counter exceeded maximum capacity, exiting to avoid infinite loop.");
       exit(-1);
+    }
 
     if (hm->data[hash_index].key == key)
       break;
