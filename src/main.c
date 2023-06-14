@@ -3,22 +3,15 @@
 
 int main(void)
 {
-  // Since ASCII is 8 bit, initialize hashmap size to 257
-  // Optimal size that eliminates the need for implenting resizing
-  HashMap hm = CreateNewHashMap(257);
+  HashMap bigram_hash_table = CreateNewHashMap(0);
 
-  for (int i = 0; i < 128; i++)
-    HashMapSet(&hm, i, i);
+  // Since ASCII is already indexed for us, we don't need a hashmap, just a normal array
+  unsigned int char_count[128] = {0};
 
   for (int i = 0; i < 128; i++) {
-    KeyValue pair = HashMapGet(&hm, i);
-    printf("%c %d\n", pair.key, pair.value);
+    printf("%d: %d\n", i, char_count[i]);
   }
 
-  //HashMapSet(&hm, 126, 99);
-  //printf("%d %d\n", HashMapGet(&hm, 'a').key, HashMapGet(&hm, 'a').value);
-  //printf("%d %d\n", HashMapGet(&hm, 126).key, HashMapGet(&hm, 126).value);
-
-  HashMapFree(&hm);
+  HashMapFree(&bigram_hash_table);
   return 0;
 }
