@@ -47,7 +47,10 @@ int main(void)
     {
       char c = line[i];
       if (0 <= c <= 128)
+      {
+        total_char_count++;
         char_count[c].count++;
+      }
     }
   }
 
@@ -64,7 +67,7 @@ int main(void)
 
 
   for (int i = 0; i < 128; i++) {
-    printf("%d: %d\n", char_count[i].c, char_count[i].count);
+    printf("%c: %f%\n", char_count[i].c, (float)char_count[i].count / total_char_count);
   }
 
   HashMapFree(&bigram_hash_table);
